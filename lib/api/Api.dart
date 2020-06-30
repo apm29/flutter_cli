@@ -2,10 +2,10 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_cli/api/LogInterceptor.dart';
-import 'package:flutter_cli/config/Config.dart';
-import 'package:flutter_cli/entity/BaseResp.dart';
-import 'package:flutter_cli/storage/Cache.dart';
+import 'package:flutter_scaffold/api/LogInterceptor.dart';
+import 'package:flutter_scaffold/config/Config.dart';
+import 'package:flutter_scaffold/entity/BaseResp.dart';
+import 'package:flutter_scaffold/storage/Cache.dart';
 
 typedef JsonProcessor<T> = T Function(dynamic json);
 
@@ -69,8 +69,8 @@ class Api {
           Config.AuthorizationHeader: Cache().token,
         },
         contentType: useFormData
-            ? Config.ContentTypeFormDataValue
-            : Config.ContentTypeFormUrlEncodeValue,
+            ? Config.ContentTypeFormData
+            : Config.ContentTypeFormUrl,
         data: useFormData ? FormData.fromMap(formData) : formData,
       ),
       cancelToken: cancelToken,
@@ -80,18 +80,18 @@ class Api {
     dynamic map;
     if (resp.headers
         .value(Config.ContentTypeHeader)
-        .contains(Config.ContentTypeTextPlainValue)) {
+        .contains(Config.ContentTypeText)) {
       map = json.decode(resp.data);
     } else {
       map = resp.data;
     }
-    dynamic code = map["Code"];
-    dynamic message = map["Msg"];
-    dynamic token = map["Token"];
-    dynamic _rawData = map["Data"];
+    dynamic code = map[Config.StatusKey];
+    dynamic message = map[Config.MessageKey];
+    dynamic token = map[Config.TokenKey];
+    dynamic _rawData = map[Config.DataKey];
     T data;
     try {
-      if (code == 200) data = processor(_rawData);
+      if (code == Config.SuccessCode) data = processor(_rawData);
     } catch (e, s) {
       print(e);
       print(s);
@@ -123,30 +123,29 @@ class Api {
             Config.AuthorizationHeader: Cache().token,
           },
           queryParameters: queryMap,
-          contentType: Config.ContentTypeFormUrlEncodeValue),
+          contentType: Config.ContentTypeFormUrl),
       cancelToken: cancelToken,
       onReceiveProgress: onReceiveProgress,
     );
     dynamic map;
     if (resp.headers
         .value(Config.ContentTypeHeader)
-        .contains(Config.ContentTypeTextPlainValue)) {
+        .contains(Config.ContentTypeText)) {
       map = json.decode(resp.data);
     } else {
       map = resp.data;
     }
-    dynamic code = map["Code"];
-    dynamic message = map["Msg"];
-    dynamic token = map["Token"];
-    dynamic _rawData = map["Data"];
+    dynamic code = map[Config.StatusKey];
+    dynamic message = map[Config.MessageKey];
+    dynamic token = map[Config.TokenKey];
+    dynamic _rawData = map[Config.DataKey];
     T data;
     try {
-      if (code == 200) data = processor(_rawData);
+      if (code == Config.SuccessCode) data = processor(_rawData);
     } catch (e, s) {
       print(e);
       print(s);
     }
-    return BaseResp<T>(
-        code, data, token.toString(), message.toString());
+    return BaseResp<T>(code, data, token.toString(), message.toString());
   }
 }

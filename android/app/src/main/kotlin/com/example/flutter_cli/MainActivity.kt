@@ -1,4 +1,4 @@
-package com.example.flutter_cli
+package com.example.flutter_scaffold
 
 import io.flutter.embedding.android.FlutterActivity
 

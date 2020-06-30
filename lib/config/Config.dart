@@ -5,8 +5,14 @@ class Config {
 
   static const AuthorizationHeader = "Authorization";
   static const ContentTypeHeader = "content-type";
-  static const ContentTypeFormUrlEncodeValue =
+  static const ContentTypeFormUrl =
       "application/x-www-form-urlencoded";
-  static const ContentTypeFormDataValue = "multipart/form-data";
-  static const ContentTypeTextPlainValue = "text/plain";
+  static const ContentTypeFormData = "multipart/form-data";
+  static const ContentTypeText = "text/plain";
+
+  static const SuccessCode = 200;
+  static const StatusKey = 'Code';
+  static const TokenKey = 'Token';
+  static const MessageKey = 'Msg';
+  static const DataKey = 'Data';
 }
