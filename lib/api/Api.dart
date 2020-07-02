@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_scaffold/api/LogInterceptor.dart';
 import 'package:flutter_scaffold/config/Config.dart';
 import 'package:flutter_scaffold/entity/BaseResp.dart';
-import 'package:flutter_scaffold/storage/Cache.dart';
+import 'package:flutter_scaffold/storage/LocalCache.dart';
 
 typedef JsonProcessor<T> = T Function(dynamic json);
 
@@ -66,7 +66,7 @@ class Api {
       options: RequestOptions(
         responseType: ResponseType.json,
         headers: {
-          Config.AuthorizationHeader: Cache().token,
+          Config.AuthorizationHeader: LocalCache().token,
         },
         contentType: useFormData
             ? Config.ContentTypeFormData
@@ -120,7 +120,7 @@ class Api {
       options: RequestOptions(
           responseType: ResponseType.json,
           headers: {
-            Config.AuthorizationHeader: Cache().token,
+            Config.AuthorizationHeader: LocalCache().token,
           },
           queryParameters: queryMap,
           contentType: Config.ContentTypeFormUrl),

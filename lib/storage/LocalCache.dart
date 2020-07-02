@@ -1,15 +1,15 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Cache {
+class LocalCache {
   SharedPreferences _sharedPreferences;
 
-  Cache._();
+  LocalCache._();
 
-  static Cache _cacheInstance;
+  static LocalCache _cacheInstance;
 
-  factory Cache() {
+  factory LocalCache() {
     if (_cacheInstance == null) {
-      _cacheInstance = Cache._();
+      _cacheInstance = LocalCache._();
     }
     return _cacheInstance;
   }
@@ -22,12 +22,8 @@ class Cache {
 
   String get token => _sharedPreferences.get(SPTokenKey);
 
-
-  void setToken(String token) {
-    try {
-      _sharedPreferences.setString(SPTokenKey, token);
-    } catch (e) {
-    }
+  Future<bool> setToken(String token) {
+      return _sharedPreferences.setString(SPTokenKey, token);
   }
 
   Future<bool> clear() {
