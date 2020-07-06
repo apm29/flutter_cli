@@ -8,7 +8,9 @@ import 'package:flutter_scaffold/entity/BaseResp.dart';
 import 'package:flutter_scaffold/storage/LocalCache.dart';
 
 typedef JsonProcessor<T> = T Function(dynamic json);
-
+Type typeOf<T>(){
+  return T;
+}
 class Api {
   Api._() {
     init();
@@ -91,7 +93,9 @@ class Api {
     dynamic _rawData = map[Config.DataKey];
     T data;
     try {
-      if (code == Config.SuccessCode) data = processor(_rawData);
+      if (code == Config.SuccessCode){
+        data = processor(_rawData);
+      }
     } catch (e, s) {
       print(e);
       print(s);

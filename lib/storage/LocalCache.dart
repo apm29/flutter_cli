@@ -15,6 +15,7 @@ class LocalCache {
   }
 
   static const SPTokenKey = 'flutter-scaffold-token';
+  static const LocaleKey = 'flutter-scaffold-locale';
 
   init() async {
     _sharedPreferences = await SharedPreferences.getInstance();
@@ -22,8 +23,14 @@ class LocalCache {
 
   String get token => _sharedPreferences.get(SPTokenKey);
 
+  String get locale => _sharedPreferences.get(LocaleKey);
+
   Future<bool> setToken(String token) {
-      return _sharedPreferences.setString(SPTokenKey, token);
+    return _sharedPreferences.setString(SPTokenKey, token);
+  }
+
+  Future<bool> setLocale(String locale) {
+    return _sharedPreferences.setString(LocaleKey, locale);
   }
 
   Future<bool> clear() {
