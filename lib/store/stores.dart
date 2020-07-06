@@ -51,6 +51,7 @@ class ReduxApp extends StatelessWidget {
     return StoreProvider(
       store: store,
       child: OKToast(
+        //StoreConnector<JiaYuState, Locale> provide locale for material app
         child: StoreConnector<JiaYuState, Locale>(
           converter: (s) => s.state.locale,
           builder: (context, locale) => MaterialApp(
@@ -69,6 +70,9 @@ class ReduxApp extends StatelessWidget {
               primarySwatch: Colors.blue,
               visualDensity: VisualDensity.adaptivePlatformDensity,
             ),
+            darkTheme: ThemeData.dark().copyWith(
+              visualDensity: VisualDensity.adaptivePlatformDensity,
+            ),
             home: child,
           ),
         ),
@@ -78,3 +82,7 @@ class ReduxApp extends StatelessWidget {
 }
 
 class AddAction {}
+class AppInitAction{
+  BuildContext context;
+  AppInitAction(this.context);
+}

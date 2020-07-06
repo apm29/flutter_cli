@@ -16,4 +16,6 @@ class Config {
   static const TokenKey = 'Token';
   static const MessageKey = 'Msg';
   static const DataKey = 'Data';
+
+  static const SplashDelay = 3000;
 }

@@ -1,3 +1,5 @@
+import 'package:fluro/fluro.dart';
+import 'package:flutter_scaffold/route/route.dart';
 import 'package:flutter_scaffold/storage/LocalCache.dart';
 
 ///
@@ -6,7 +8,12 @@ import 'package:flutter_scaffold/storage/LocalCache.dart';
 /// description :
 ///
 class Application {
-  static init() async {
+  static Router router;
+
+  static  init() async {
+    Router router = Router();
+    Routes.configureRoutes(router);
+    Application.router = router;
     await LocalCache().init();
   }
 }

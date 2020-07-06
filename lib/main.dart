@@ -4,20 +4,21 @@ import 'package:flutter_redux_dev_tools/flutter_redux_dev_tools.dart';
 import 'package:flutter_scaffold/api/Api.dart';
 import 'package:flutter_scaffold/application/Application.dart';
 import 'package:flutter_scaffold/generated/l10n.dart';
-import 'package:flutter_scaffold/store/Store.dart';
+import 'package:flutter_scaffold/pages/SplashPage.dart';
+import 'package:flutter_scaffold/store/stores.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Application.init();
   runApp(
     ReduxApp(
-      child: MyHomePage(title: 'Flutter Demo Home Page'),
+      child: SplashPage(),
     ),
   );
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class HomePage extends StatefulWidget {
+  HomePage({Key key}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -28,13 +29,12 @@ class MyHomePage extends StatefulWidget {
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
 
-  final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomePageState extends State<HomePage> {
   void _incrementCounter(BuildContext context) async {
     var res = await Api().post<Object>('/mall/category', processor: (s) => s);
     print(res.code);
@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Text(S.of(context).appName),
       ),
       endDrawer: Drawer(child: ReduxDevTools(store)),
       body: Center(
