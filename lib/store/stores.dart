@@ -41,10 +41,10 @@ class JiaYuState {
   JiaYuState() : this.locale = Locale(LocalCache().locale ?? 'zh');
 }
 
-class ReduxApp extends StatelessWidget {
-  final Widget child;
+class ReduxApp extends StatelessWidget{
+  final Widget firstPage;
 
-  const ReduxApp({Key key, this.child}) : super(key: key);
+  const ReduxApp({Key key, this.firstPage}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +73,7 @@ class ReduxApp extends StatelessWidget {
             darkTheme: ThemeData.dark().copyWith(
               visualDensity: VisualDensity.adaptivePlatformDensity,
             ),
-            home: child,
+            home: firstPage,
           ),
         ),
       ),
