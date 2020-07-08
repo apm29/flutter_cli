@@ -2,7 +2,7 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_scaffold/application/Application.dart';
-import 'package:flutter_scaffold/main.dart';
+import 'package:flutter_scaffold/pages/HomePage.dart';
 import 'package:flutter_scaffold/pages/SplashPage.dart';
 
 ///
@@ -74,6 +74,14 @@ class AppRouter {
       context,
       Routes.home,
       replace: true,
+      transition: defaultTransitionType,
+    );
+  }
+
+  static Future toSplash(BuildContext context) {
+    return Application.router.navigateTo(
+      context,
+      Routes.root,
       transition: defaultTransitionType,
     );
   }

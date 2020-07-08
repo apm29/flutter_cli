@@ -9,6 +9,7 @@ class Config {
   static const ContentTypeFormUrl =
       "application/x-www-form-urlencoded";
   static const ContentTypeFormData = "multipart/form-data";
+  static const ContentTypeJson = "application/json";
   static const ContentTypeText = "text/plain";
 
   static const SuccessCode = 200;
